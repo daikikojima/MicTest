@@ -12,6 +12,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import permissions.dispatcher.*
 
+@RuntimePermissions
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
