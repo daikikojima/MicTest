@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         showMikeWithPermissionCheck()
+        showStorateWithPermissionCheck()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -50,6 +51,26 @@ class MainActivity : AppCompatActivity() {
     @OnNeverAskAgain(Manifest.permission.RECORD_AUDIO)
     fun onCameraNeverAskAgain() {
         createSnack(SnackType.NEVER)
+    }
+
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun showStorate() {
+
+    }
+
+    @OnShowRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun showRationaleStorage(request: PermissionRequest) {
+
+    }
+
+    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onStorageDenied() {
+
+    }
+
+    @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onStorageNeverAskAgain() {
+
     }
 
     fun createSnack(type: SnackType){
