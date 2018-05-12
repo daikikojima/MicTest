@@ -20,6 +20,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    @NeedsPermission(Manifest.permission.RECORD_AUDIO)
+    fun showMike(){
+        createSnack(SnackType.ENABLE)
+    }
+
+    @OnShowRationale(Manifest.permission.RECORD_AUDIO)
+    fun showRationaleMike(request: PermissionRequest){
+        AlertDialog.Builder(this)
+                .setPositiveButton("OK"){_,_ -> request.proceed()}
+                .setNegativeButton("Cancel"){_,_ -> request.cancel()}
+                .setCancelable(false)
+                .setTitle("MicTest")
+                .setMessage("MicTest needs permmision for Microphone. Would you agree?")
+                .show()
+    }
+
+    @OnPermissionDenied(Manifest.permission.RECORD_AUDIO)
+    fun onCameraDenied() {
+        createSnack(SnackType.DENIED)
+    }
+
+    @OnNeverAskAgain(Manifest.permission.RECORD_AUDIO)
+    fun onCameraNeverAskAgain() {
+        createSnack(SnackType.NEVER)
+    }
+
     fun createSnack(type: SnackType){
         val snackbar:Snackbar
         snackbar = when(type){
