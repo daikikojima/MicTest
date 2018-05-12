@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     @NeedsPermission(Manifest.permission.RECORD_AUDIO)
     fun showMike(){
-        createSnack(SnackType.ENABLE)
+        createSnack(SnackType.ENABLE_MIC)
     }
 
     @OnShowRationale(Manifest.permission.RECORD_AUDIO)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     @OnPermissionDenied(Manifest.permission.RECORD_AUDIO)
     fun onCameraDenied() {
-        createSnack(SnackType.DENIED)
+        createSnack(SnackType.DENIED_MIC)
     }
 
     @OnNeverAskAgain(Manifest.permission.RECORD_AUDIO)
@@ -55,10 +55,10 @@ class MainActivity : AppCompatActivity() {
     fun createSnack(type: SnackType){
         val snackbar:Snackbar
         snackbar = when(type){
-            SnackType.ENABLE ->{
+            SnackType.ENABLE_MIC ->{
                 Snackbar.make(rootLayout, "Mic enabled", Snackbar.LENGTH_SHORT)
             }
-            SnackType.DENIED -> {
+            SnackType.DENIED_MIC -> {
                 Snackbar.make(rootLayout, "Permission Denied", Snackbar.LENGTH_LONG)
             }
             SnackType.NEVER -> {
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         when(type){
-            SnackType.ENABLE, SnackType.DENIED -> {
+            SnackType.ENABLE_MIC, SnackType.DENIED_MIC -> {
                 snackbar.setAction("Close", View.OnClickListener {
                     snackbar.dismiss()
                 }).show()
@@ -83,5 +83,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    enum class SnackType{ENABLE, DENIED, NEVER}
+    enum class SnackType{ENABLE_MIC, DENIED_MIC, NEVER}
 }
